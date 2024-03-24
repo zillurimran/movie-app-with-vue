@@ -1,14 +1,14 @@
-<script setup></script>
+<script setup>
+import { useMovieStore } from '../stores/movie'
+const movieStore = useMovieStore();
+</script>
 
 <template>
   <div class="home">
     <div class="featured-movie-card">
       <router-link to="/movie/tt0078346">
-        <img
-          src="../assets/images/Default_superman_movie_poster_realistic_width_2048_0.jpg"
-          alt="movie-img"
-          class="featured-movie-img"
-        />
+        <img src="../assets/images/Default_superman_movie_poster_realistic_width_2048_0.jpg" alt="movie-img"
+          class="featured-movie-img" />
 
         <div class="movie-detail">
           <h3>Superman</h3>
@@ -20,28 +20,25 @@
       </router-link>
     </div>
 
-    <form action="" class="search-box">
+    <form @submit.prevent="movieStore.searchMovies" class="search-box">
       <div class="">
-        <input type="text" placeholder="Search the movie" />
+        <input type="text" placeholder="Search the movie" v-model="movieStore.search" />
         <input type="submit" value="Search">
       </div>
     </form>
 
     <div class="movies-list">
-      <div class="movie">
+      <div class="movie" v-for="movie in movieStore.movies" :key="movie.imbdID">
         <router-link to="/movie/tt0078346" class="movie-link">
           <div class="movie-image">
-            <img
-              src="../assets/images/Default_superman_movie_poster_realistic_width_2048_0.jpg"
-              alt=""
-            />
+            <img :src="movie.Poster" alt="" />
 
-            <div class="movie-type">Action, Drama</div>
+            <div class="movie-type">{{ movie.Type }}</div>
           </div>
 
           <div class="movie-detail">
-            <p class="movie-year">2017</p>
-            <h3>Superman</h3>
+            <p class="movie-year">{{ movie.Year }}</p>
+            <h3>{{ movie.Title }}</h3>
           </div>
         </router-link>
       </div>
@@ -139,6 +136,7 @@
   .movies-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content:center;
     margin: 0px 8px;
 
     .movie {
