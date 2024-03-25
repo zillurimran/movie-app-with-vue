@@ -6,7 +6,7 @@ const movieStore = useMovieStore();
 <template>
   <div class="home">
     <div class="featured-movie-card">
-      <router-link to="/movie/tt0078346">
+      <router-link :to="{name:'home'}">
         <img src="../assets/images/Default_superman_movie_poster_realistic_width_2048_0.jpg" alt="movie-img"
           class="featured-movie-img" />
 
@@ -28,8 +28,8 @@ const movieStore = useMovieStore();
     </form>
 
     <div class="movies-list">
-      <div class="movie" v-for="movie in movieStore.movies" :key="movie.imbdID">
-        <router-link to="/movie/tt0078346" class="movie-link">
+      <div class="movie" v-for="movie in movieStore.movies" :key="movie.imdbID">
+        <router-link :to="{name: 'movie-detail', params: {id: movie.imdbID}}" class="movie-link">
           <div class="movie-image">
             <img :src="movie.Poster" alt="" />
 
